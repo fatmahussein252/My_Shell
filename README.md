@@ -1,7 +1,7 @@
 # My_Shell
 ## The fshell
 
-Welcome to the fshell! This shell is a lightweight, user-friendly command-line interpreter inspired by the Bash shell. It supports a range of built-in commands and can execute external commands using standard UNIX system calls.
+Welcome to the fshell! This shell is one of my is a lightweight, user-friendly command-line interpreter inspired by the Bash shell. It supports a range of built-in commands and can execute external commands using standard UNIX system calls.
 
 ### Features
 
@@ -30,13 +30,13 @@ Welcome to the fshell! This shell is a lightweight, user-friendly command-line i
 
 ### Usage
 
-  To run the shell, compile the source code and execute the resulting binary:
+  To run the shell, compile the source code (myshell.c) and execute the resulting binary (You have to download all the files in the repo in one directory to run the code):
 
 ```sh
 gcc myshell.c -o exe
 ./exe
 ```
-Once the shell is running, you can enter internal commands or external as you would in a standard Bash shell.
+Once the shell is running, you can enter internal commands (all have the same name in the bash shell but starts with the letter ' f ' ) or external as you would in a standard Bash shell.
 For example:
 ```
 > fcd /path/to/directory
@@ -46,5 +46,9 @@ For example:
 ```
 ### Sample Output
 
-Below is a sample output demonstrating the usage and interface of the fshell:
-![image](https://github.com/user-attachments/assets/ae6edeec-02ff-4542-8784-75b361af38e1)
+Below is a sample output demonstrating the usage and interface of the shell:
+
+![354013811-ae6edeec-02ff-4542-8784-75b361af38e1](https://github.com/user-attachments/assets/b7e91921-51c9-468d-b155-7d2bd0aad5c5)
+
+### About this project
+This project is one of the most interesting tasks in the "Intro to System Programming under Linux" training program at STMicroelectronics. This project offers hands-on experience in building a custom shell, enhancing understanding of operating system concepts and process management.
