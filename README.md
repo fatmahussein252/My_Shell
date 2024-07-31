@@ -1,7 +1,7 @@
 # My_Shell
 ## The fshell
 
-Welcome to the fshell! This shell is one of is a lightweight, user-friendly command-line interpreter inspired by the Bash shell. It supports a range of built-in commands and can execute external commands using standard UNIX system calls.
+Welcome to the fshell! This shell is a lightweight, user-friendly command-line interpreter inspired by the Bash shell. It supports a range of built-in commands and can execute external commands using standard UNIX system calls.
 
 ### Features
 
