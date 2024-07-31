@@ -6,30 +6,34 @@ int mv(int argc, const char **argv)
 {
 	struct stat newpath_stat;
 	struct stat oldpath_stat;
-	stat(argv[1], &newpath_stat);
-	if (stat(argv[1], &oldpath_stat) != 0)
-       	{
-        	perror("source stat");
-        	return 0;
-       	}
+	char srcpath[50];
+        char dispath[50];
+        char *srcfileName;
 
-    	// Check if the path is a directory
-    	if (S_ISDIR(oldpath_stat.st_mode))
-       	{
-        	printf("The source path is a directory.\n");
-    		return 0;
-	}
 
 	/* store the target pathname in modifiable array*/
-	char temp[100];
-	strncpy(temp, argv[2], strlen(argv[2]));
+	strncpy(dispath, argv[2], strlen(argv[2]));
 	/* delete the "\n" char from the target path (If it was the last arguement in the argv)*/
 	if (argc == 3)
 	{
-        	temp[strlen(argv[2])-1] = 0;
+        	dispath[strlen(argv[2])-1] = 0;
 	}
-	argv[2] = temp;
-    	
+	argv[2] = dispath;
+	/*Get the real path for tha source and target*/
+	realpath(argv[1],srcpath);
+	realpath(argv[2],dispath);
+	if(strcmp(srcpath,dispath)==0)
+	{
+		printf("A file with the same name exists in the target directory\n");
+                return 0;
+
+	}
+	/*check for the validity of the source path*/
+	if (srcpath == NULL)
+	{
+		perror("source path");
+		return 0;
+	}
 	/*Check for names conflicts in the target directory*/
 	if(access(argv[2],F_OK) == 0)
 	{	
@@ -39,15 +43,16 @@ int mv(int argc, const char **argv)
 		// Check if the path is a directory
                 if (S_ISDIR(newpath_stat.st_mode))
                 {
-                        //check if the path ends with back slash or no
+                        srcfileName = basename(srcpath);
+			//check if the path ends with back slash or no
                         if (*(argv[2]+strlen(argv[2])-1) == '/')
                         {
-                                strncat(temp, argv[1], strlen(argv[1]));
+                                strncat(dispath, srcfileName, strlen(srcfileName));
                         }
                         else
                         {
-                                strcat(temp,"/");
-                                strncat(temp, argv[1], strlen(argv[1]));
+                                strcat(dispath,"/");
+                                strncat(dispath, srcfileName, strlen(srcfileName));
                         }
 			/* recheck for names conflicts after concatinating the source file name*/
                         if(access(argv[2],F_OK) == 0)
@@ -57,15 +62,6 @@ int mv(int argc, const char **argv)
                         }
                         
                 }
-		else if (S_ISREG(newpath_stat.st_mode))
-		{
-			if(access(argv[2],F_OK) == 0)
-                        {
-				printf("A file with the same name exists in the target directory\n");
-                        	return 0;
-		
-			}
-		}
 		else
 		{
 			printf("target path: No such file or directory\n");
@@ -75,7 +71,12 @@ int mv(int argc, const char **argv)
 
 	/* move the file*/
 	int ret = rename(argv[1],argv[2]);
-	
+	if (ret == -1)
+	{	
+		perror("Couldn't move this file");
+		return 0;
+		
+	}	
     	return 0;
 }
 

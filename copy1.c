@@ -6,26 +6,33 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
-
+#include <libgen.h>
+#include <limits.h>
+       
 int cp(int argc, const char **argv)
 { 
         struct stat path_stat;
 	char buff[100];
         ssize_t rsize = 0;
         ssize_t wsize = 0;
-	char cwd[50];
+	char srcpath[50];
+	char dispath[50];
+	char *srcfileName;
+	
 	/* store the target pathname in modifiable array*/
-        char temp[100];
-        strncpy(temp, argv[2], strlen(argv[2]));
+	strncpy(dispath, argv[2], strlen(argv[2]));
         /* delete the "\n" char from the target path (If it was the last arguement in the argv)*/
         if (argc == 3)
         {
-                temp[strlen(argv[2])-1] = 0;
+                dispath[strlen(argv[2])-1] = 0;
         }
-        argv[2] = temp;
-
+        argv[2] = dispath;
+	/* get the real path of the source and target files*/
+	realpath(argv[1], srcpath);
+	realpath(argv[2], dispath);
+	argv[1] = srcpath;
 	/* Check if the source and target are the same file*/
-        if (strncmp(argv[1],argv[2],strlen(argv[1])) == 0 || (strncmp(getcwd(cwd,50),argv[2],strlen(cwd)) == 0 && access(argv[2],W_OK) == 0 ))
+        if (strcmp(srcpath,dispath) == 0)
         {
                 printf("cp: '%s' and '%s' are the same file\n",argv[1],argv[2]);
                 return 0;
@@ -49,16 +56,16 @@ int cp(int argc, const char **argv)
 		// Check if the path is a directory
         	if (S_ISDIR(path_stat.st_mode))
         	{	
-            		//check if the path ends with back slash or no
-            		if (*(argv[2]+strlen(argv[2])-1) == '/')
-            		{
-              			strncat(temp, argv[1], strlen(argv[1]));
-            		}
-            		else
-            		{
-              			strcat(temp,"/");
-              			strncat(temp, argv[1], strlen(argv[1]));
-            		}
+            		srcfileName = basename(srcpath);
+			strcat(dispath,"/");
+              		strncat(dispath, srcfileName, strlen(argv[1]));
+            		
+			/* recheck for the source and target be the same file after concatination*/
+			if (strcmp(srcpath,dispath) == 0)
+        		{
+                		printf("cp: '%s' and '%s' are the same file\n",argv[1],argv[2]);
+                		return 0;
+        		}
 			distd = creat(argv[2],S_IRWXU);
         	}
 		else
