@@ -16,6 +16,7 @@ Welcome to the fshell! This shell is a lightweight, user-friendly command-line i
   - `fexit` - Exit the fshell
   - `fhelp` - print all the supported internal commands with a brief info about each one
 
+Note: No options supported in the internal commands till now.
 - **External Command Execution:**
   - Supports executing external commands using `fork` and `execvp`
   - Searches for executables in directories specified by the `PATH` environment variable
