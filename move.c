@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <errno.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <libgen.h>
 int mv(int argc, const char **argv)
 {
 	struct stat newpath_stat;

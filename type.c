@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <stdlib.h>
 int type(int argc,const char **argv)
 {
 	char *cmds[9] = {"fcp","fmv","fecho","fpwd","fcd","ftype","fenv","fhelp","fexit"};

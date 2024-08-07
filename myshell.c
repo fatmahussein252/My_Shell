@@ -1,13 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include "./copy1.c"
-#include "./echo.c"
-#include "./move.c"
-#include "./external.c"
-#include "./chdir.c"
-#include "./type.c"
-#include "./printEnv.c"
+#include "./internal.h"
+
 
 #define COLOR_RESET "\033[0m"
 #define COLOR_BOLD_Mgenta "\033[1;35m"
