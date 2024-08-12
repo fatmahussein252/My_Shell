@@ -73,7 +73,7 @@ do
                         duperr = dup(2);
                         if (c == myargc-2)
 				strtok((char*)myargv[c+1],"\n");
-                        errfd = open(myargv[c+1],O_WRONLY);
+                        errfd = creat(myargv[c+1],S_IRWXU);
                         redirect(2,errfd);
                         /*remove redirection argumets from array of arguments*/
                         modifiedargs[c] = NULL;
