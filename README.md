@@ -46,7 +46,7 @@ Welcome to the fshell! This shell is a lightweight, user-friendly command-line i
   To run the shell, compile the source code using the Makefile and execute the resulting binary:
 
 ```sh
-make
+make clean #clean for deleting all the generated object files, if you need them just use 'make'
 ./myshell
 ```
 Once the shell is running, you can enter internal commands or external as you would in a standard Bash shell.
