@@ -15,6 +15,19 @@ Welcome to the fshell! This shell is a lightweight, user-friendly command-line i
   - `fenv` - print all the environment variables
   - `fexit` - Exit the fshell
   - `fhelp` - print all the supported internal commands with a brief info about each one
+  - `history` - print the history of the last 100 entered commands
+  - `ffree` - print info about physical memory and swap
+  - `fuptime` - print the uptime of the system
+- **Built-in Commands:**
+    - piping (supported for external commands only)
+      
+      ex: `ls | grep <file/dir_name>`
+    - redirection of input, output and error files
+       - Output redirection: `command to> file_name`
+       - Input redirection: `command from< file_name`
+       - Error redirection: `command err> file_name`
+         
+      ex: `echo "Hello, my name is fatma" to> out err> error`
 
 - **External Command Execution:**
   - Supports executing external commands using `fork` and `execvp`
@@ -30,11 +43,11 @@ Welcome to the fshell! This shell is a lightweight, user-friendly command-line i
 
 ### Usage
 
-  To run the shell, compile the source code and execute the resulting binary:
+  To run the shell, compile the source code using the Makefile and execute the resulting binary:
 
 ```sh
-gcc -o exe myshell.c copy1.c move.c chdir.c printEnv.c type.c external.c echo.c
-./exe
+make
+./myshell
 ```
 Once the shell is running, you can enter internal commands or external as you would in a standard Bash shell.
 For example:
