@@ -18,7 +18,7 @@ Welcome to the fshell! This shell is a lightweight, user-friendly command-line i
   - `history` - print the history of the last 100 entered commands
   - `ffree` - print info about physical memory and swap
   - `fuptime` - print the uptime of the system
-- **Built-in Commands:**
+- **Other features:**
     - piping (supported for external commands only)
       
       ex: `ls | grep <file/dir_name>`
