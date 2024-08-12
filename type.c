@@ -4,7 +4,7 @@
 #include <stdlib.h>
 int type(int argc,const char **argv)
 {
-	char *cmds[9] = {"fcp","fmv","fecho","fpwd","fcd","ftype","fenv","fhelp","fexit"};
+	char *cmds[11] = {"fcp","fmv","fecho","fpwd","fcd","ftype","fenv","ffree","fuptime","fhelp","fexit"};
 	if (argc == 1)
 	{
 		printf("ftype: missing command operand\n");
@@ -40,7 +40,7 @@ int type(int argc,const char **argv)
 		if(dir == NULL)
 		{
 			int c;
-                	for (c = 0; c < 9 ; c++)
+                	for (c = 0; c < 11 ; c++)
                 	{
                        	if (strcmp(argv[i],cmds[c]) == 0)
                        	{
@@ -48,7 +48,7 @@ int type(int argc,const char **argv)
                             break;
                        	}
                 	}	
-                	if (c == 9)
+                	if (c == 11)
                        	    printf("%-5s: command not found\n",argv[i]);
 		}
 	}
